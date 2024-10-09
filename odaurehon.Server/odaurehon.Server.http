@@ -1,0 +1,6 @@
+@odaurehon.Server_HostAddress = http://localhost:5155
+
+GET {{odaurehon.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
