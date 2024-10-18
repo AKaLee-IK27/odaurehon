@@ -18,53 +18,56 @@ public interface IBookingService
 
 public class BookingService : IBookingService
 {
-    IBookingRepository _bookingRepository;
-    IUnitOfWork _unitOfWork;
+    IBookingRepository bookingRepository;
+    IUnitOfWork unitOfWork;
 
     // Dependency Injection
     public BookingService(IBookingRepository bookingRepository, IUnitOfWork unitOfWork)
     {
-        _bookingRepository = bookingRepository;
-        _unitOfWork = unitOfWork;
+        this.bookingRepository = bookingRepository;
+        this.unitOfWork = unitOfWork;
     }
 
     public void Add(Booking booking)
     {
-        _bookingRepository.Add(booking);
+        bookingRepository.Add(booking);
     }
 
     public void Delete(int id)
     {
-        _bookingRepository.Delete(id);
+        bookingRepository.Delete(id);
     }
 
     public IEnumerable<Booking> GetAll()
     {
-        return _bookingRepository.GetAll(["Customer", "Payment"]);
+        return bookingRepository.GetAll(["Customer", "Payment"]);
     }
 
     public IEnumerable<Booking> GetByCustomerId(int customerId)
     {
-        return _bookingRepository.GetMulti(x => x.CustomerId == customerId, ["Customer", "Payment"]);
+        return bookingRepository.GetMulti(x => x.CustomerId == customerId, ["Customer", "Payment"]);
     }
 
     public Booking GetById(int id)
     {
-        return _bookingRepository.GetSingleById(id);
+        return bookingRepository.GetSingleById(id);
     }
 
     public Booking GetByPaymentId(int paymentId)
     {
-        return _bookingRepository.GetSingleByCondition(x => x.PaymentId == paymentId, ["Customer", "Payment"]);
+        return bookingRepository.GetSingleByCondition(
+            x => x.PaymentId == paymentId,
+            ["Customer", "Payment"]
+        );
     }
 
     public void SaveChanges()
     {
-        _unitOfWork.Commit();
+        unitOfWork.Commit();
     }
 
     public void Update(Booking booking)
     {
-        _bookingRepository.Update(booking);
+        bookingRepository.Update(booking);
     }
 }

@@ -79,7 +79,7 @@ namespace Server.Repositories
             Expression<Func<T, bool>> filter,
             out int total,
             int index = 0,
-            int size = 50,
+            int size = 50, // Default page size
             string[]? includes = null
         )
         {
