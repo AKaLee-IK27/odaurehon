@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "odaurehon.Server", "odaurehon.Server\odaurehon.Server.csproj", "{3ADC6FD9-3DF3-442D-B146-26855CBB4C29}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server", "odaurehon.Server\Server.csproj", "{3ADC6FD9-3DF3-442D-B146-26855CBB4C29}"
 EndProject
-Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "odaurehon.client", "odaurehon.client\odaurehon.client.esproj", "{2C444F91-09AA-4996-BF7E-492A73B1AD24}"
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "Client", "odaurehon.client\Client.esproj", "{2C444F91-09AA-4996-BF7E-492A73B1AD24}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
