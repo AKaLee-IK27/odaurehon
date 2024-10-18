@@ -9,6 +9,10 @@ namespace Server.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
+        [Required]
+        [Column(TypeName = "varchar(128)")]
+        public required string CitizenIdentification { get; set; }
+
         public virtual required IEnumerable<Booking> Bookings { get; set; }
     }
 }

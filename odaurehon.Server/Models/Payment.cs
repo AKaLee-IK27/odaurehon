@@ -8,6 +8,7 @@ namespace Server.Models
         OnlineBanking,
         Cash
     }
+
     public enum PaymentStatus
     {
         Pending,
@@ -26,10 +27,10 @@ namespace Server.Models
         public required string PaymentAmount { get; set; }
 
         [Required]
-        public PaymentMethod PaymentMethod { get; set; }
+        public PaymentMethod? PaymentMethod { get; set; }
 
         [Required]
-        public PaymentStatus PaymentStatus { get; set; }
+        public PaymentStatus PaymentStatus { get; set; } = PaymentStatus.Pending;
 
         [Required]
         public DateTime PaidDate { get; set; }

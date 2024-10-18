@@ -31,6 +31,7 @@ namespace Server.Models
         [EnumDataType(typeof(BusStatus))]
         public BusStatus Status = BusStatus.Available;
 
+        // Navigation properties
         [Required]
         public int DriverId { get; set; }
         [ForeignKey("DriverId")]

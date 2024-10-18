@@ -7,22 +7,23 @@ namespace Server.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public required int Id { get; set; }
 
         [Required]
-        public DateTime BookingDate { get; set; }
+        public DateTime CreatedDate { get; set; }
 
         [Required]
         public int CustomerId { get; set; }
+
         [ForeignKey("CustomerId")]
         public virtual required Customer Customer { get; set; }
 
         [Required]
         public int PaymentId { get; set; }
+
         [ForeignKey("PaymentId")]
         public virtual required Payment Payment { get; set; }
 
         public virtual required IEnumerable<Ticket> Tickets { get; set; }
-
     }
 }
