@@ -4,8 +4,9 @@ namespace Server.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {
-        IBusRepository Developers { get; }
+        IBusRepository Buses { get; }
+        IBookingRepository Bookings { get; }
 
-        int Complete();
+        int Commit();
     }
 }

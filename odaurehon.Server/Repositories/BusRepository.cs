@@ -2,18 +2,12 @@
 using Server.Models;
 using Server.Models.Data;
 
-namespace Server.Repositories
+namespace Server.Repositories;
+
+public interface IBusRepository : IGenericRepository<Bus> { }
+
+public class BusRepository : GenericRepository<Bus>, IBusRepository
 {
-    public interface IBusRepository : IGenericRepository<Bus>
-    {
-
-    }
-
-    public class BusRepository : GenericRepository<Bus>, IBusRepository
-    {
-        public BusRepository(EFDataContext context) : base(context)
-        {
-
-        }
-    }
+    public BusRepository(EFDataContext context)
+        : base(context) { }
 }
