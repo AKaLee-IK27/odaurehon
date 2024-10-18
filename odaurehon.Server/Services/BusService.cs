@@ -11,7 +11,7 @@ public interface IBusService
     void Update(Bus bus);
     IEnumerable<Bus> GetAll();
     Bus GetById(int id);
-    IEnumerable<Bus> GetAllByDepartureTimeRange(TimeOnly from, TimeOnly to);
+    IEnumerable<Bus> GetAllByDepartureTimeRange(DateTime from, DateTime to);
     IEnumerable<Bus> GetByRouteId(int routeId);
     void SaveChanges();
 }
@@ -39,31 +39,31 @@ public class BusService : IBusService
 
     public IEnumerable<Bus> GetAll()
     {
-        return busRepository.GetAll();
+        return busRepository.GetAll(["BusRoute"]);
     }
 
-    public IEnumerable<Bus> GetAllByDepartureTimeRange(TimeOnly from, TimeOnly to)
+    public IEnumerable<Bus> GetAllByDepartureTimeRange(DateTime from, DateTime to)
     {
-        throw new NotImplementedException();
+        return busRepository.GetAllByDepartureTimeRange(from, to);
     }
 
     public Bus GetById(int id)
     {
-        throw new NotImplementedException();
+        return busRepository.GetSingleById(id);
     }
 
     public IEnumerable<Bus> GetByRouteId(int routeId)
     {
-        throw new NotImplementedException();
+        return busRepository.GetMulti(b => b.BusRouteId == routeId, ["BusRoute"]);
     }
 
     public void SaveChanges()
     {
-        throw new NotImplementedException();
+        unitOfWork.Commit();
     }
 
     public void Update(Bus bus)
     {
-        throw new NotImplementedException();
+        busRepository.Update(bus);
     }
 }
