@@ -34,8 +34,8 @@ namespace Server.Models
         [Required]
         public DateTime PaidDate { get; set; }
 
-        public int BookingId { get; set; }
-        [ForeignKey("BookingId")]
-        public virtual required Booking Booking { get; set; }
+        //public int BookingId { get; set; }
+        //[ForeignKey("BookingId")]
+        //public virtual required Booking Booking { get; set; }
     }
 }

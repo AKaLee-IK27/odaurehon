@@ -15,7 +15,7 @@ namespace Server.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [Column(TypeName = "varchar(128)")]

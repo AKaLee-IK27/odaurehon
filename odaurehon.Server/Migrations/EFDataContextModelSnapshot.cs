@@ -24,49 +24,53 @@ namespace Server.Migrations
 
             modelBuilder.Entity("Server.Models.Booking", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("BookingDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("BusId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
 
-                    b.Property<Guid>("CustomerId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("PaymentId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BusId");
-
                     b.HasIndex("CustomerId");
+
+                    b.HasIndex("PaymentId");
 
                     b.ToTable("Bookings");
                 });
 
             modelBuilder.Entity("Server.Models.Bus", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("BusNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("varchar(128)");
 
-                    b.Property<Guid>("BusRouteId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("BusRouteId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Capacity")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("DriverId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("DriverId")
+                        .HasColumnType("int");
 
                     b.Property<string>("LicensePlate")
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("varchar(128)");
 
                     b.HasKey("Id");
 
@@ -79,30 +83,35 @@ namespace Server.Migrations
 
             modelBuilder.Entity("Server.Models.BusRoute", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("ArrivalTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Departure")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<DateTime>("DepartureTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Destination")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<double>("DistanceKm")
                         .HasColumnType("float");
 
                     b.Property<string>("RouteName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
 
@@ -111,9 +120,11 @@ namespace Server.Migrations
 
             modelBuilder.Entity("Server.Models.Customer", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -137,14 +148,16 @@ namespace Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("Server.Models.Driver", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -177,40 +190,44 @@ namespace Server.Migrations
 
             modelBuilder.Entity("Server.Models.Payment", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
 
-                    b.Property<Guid>("BookingId")
-                        .HasColumnType("uniqueidentifier");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("PaidDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("PaymentAmount")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
-                    b.Property<string>("PaymentDate")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("PaymentMethod")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PaymentStatus")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BookingId")
-                        .IsUnique();
 
                     b.ToTable("Payments");
                 });
 
             modelBuilder.Entity("Server.Models.Ticket", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
 
-                    b.Property<Guid>("BookingId")
-                        .HasColumnType("uniqueidentifier");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<Guid>("BusId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("BookingId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BusId")
+                        .HasColumnType("int");
 
                     b.Property<float>("Price")
                         .HasColumnType("real");
@@ -227,38 +244,38 @@ namespace Server.Migrations
 
                     b.HasIndex("BusId");
 
-                    b.ToTable("Ticket");
+                    b.ToTable("Tickets");
                 });
 
             modelBuilder.Entity("Server.Models.Booking", b =>
                 {
-                    b.HasOne("Server.Models.Bus", "Bus")
-                        .WithMany()
-                        .HasForeignKey("BusId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Server.Models.Customer", "Customer")
                         .WithMany("Bookings")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Bus");
+                    b.HasOne("Server.Models.Payment", "Payment")
+                        .WithMany()
+                        .HasForeignKey("PaymentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Customer");
+
+                    b.Navigation("Payment");
                 });
 
             modelBuilder.Entity("Server.Models.Bus", b =>
                 {
                     b.HasOne("Server.Models.BusRoute", "BusRoute")
-                        .WithMany()
+                        .WithMany("Buses")
                         .HasForeignKey("BusRouteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Server.Models.Driver", "Driver")
-                        .WithMany("Buses")
+                        .WithMany()
                         .HasForeignKey("DriverId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -268,27 +285,16 @@ namespace Server.Migrations
                     b.Navigation("Driver");
                 });
 
-            modelBuilder.Entity("Server.Models.Payment", b =>
-                {
-                    b.HasOne("Server.Models.Booking", "Booking")
-                        .WithOne("Payment")
-                        .HasForeignKey("Server.Models.Payment", "BookingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Booking");
-                });
-
             modelBuilder.Entity("Server.Models.Ticket", b =>
                 {
                     b.HasOne("Server.Models.Booking", "Booking")
-                        .WithMany()
+                        .WithMany("Tickets")
                         .HasForeignKey("BookingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Server.Models.Bus", "Bus")
-                        .WithMany()
+                        .WithMany("Tickets")
                         .HasForeignKey("BusId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -300,18 +306,22 @@ namespace Server.Migrations
 
             modelBuilder.Entity("Server.Models.Booking", b =>
                 {
-                    b.Navigation("Payment")
-                        .IsRequired();
+                    b.Navigation("Tickets");
+                });
+
+            modelBuilder.Entity("Server.Models.Bus", b =>
+                {
+                    b.Navigation("Tickets");
+                });
+
+            modelBuilder.Entity("Server.Models.BusRoute", b =>
+                {
+                    b.Navigation("Buses");
                 });
 
             modelBuilder.Entity("Server.Models.Customer", b =>
                 {
                     b.Navigation("Bookings");
-                });
-
-            modelBuilder.Entity("Server.Models.Driver", b =>
-                {
-                    b.Navigation("Buses");
                 });
 #pragma warning restore 612, 618
         }

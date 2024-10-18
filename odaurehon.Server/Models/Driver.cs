@@ -11,8 +11,8 @@ namespace Server.Models
 
         public required string LicenseNumber { get; set; }
 
-        public int BusId { get; set; }
-        [ForeignKey("BusId")]
-        public virtual required Bus Bus { get; set; }
+        //public int BusId { get; set; }
+        //[ForeignKey("BusId")]
+        //public virtual required Bus Bus { get; set; }
     }
 }
